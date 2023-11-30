@@ -1,4 +1,4 @@
-package christmas.view.validator;
+package christmas.validator;
 
 import christmas.exception.IllegalArgumentExceptionType;
 
