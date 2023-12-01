@@ -1,6 +1,6 @@
 package christmas.constant;
 
-public enum MenuTypeConstant {
+public enum MenuType {
     APPETIZER,
     MAIN,
     DESSERT,
