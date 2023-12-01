@@ -1,11 +1,11 @@
-package christmas.validator;
+package christmas.validator.input;
 
 import christmas.exception.IllegalArgumentExceptionType;
 
 import static christmas.constant.DateConstant.DATE_MAX_NUMBER;
 import static christmas.constant.DateConstant.DATE_MIN_NUMBER;
 
-public class InputValidator {
+public class InputDateValidator {
 
     public void dateValidator(String input) {
         onlyNumberValidator(input);

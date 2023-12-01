@@ -2,11 +2,10 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.order.dto.MenuDto;
-import christmas.validator.InputValidator;
+import christmas.validator.input.InputDateValidator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static christmas.constant.InfoMessage.ASKING_DATE_MESSAGE;
 import static christmas.constant.InfoMessage.ASKING_MENU_MESSAGE;
@@ -17,13 +16,13 @@ import static christmas.constant.StringConstant.DELIMITER;
 
 public class InputView {
 
-    InputValidator inputValidator = new InputValidator();
+    InputDateValidator inputDateValidator = new InputDateValidator();
 
     public int readDate() {
         System.out.println(ASKING_DATE_MESSAGE.getMessage());
         String input = Console.readLine();
 
-        inputValidator.dateValidator(input);
+        inputDateValidator.dateValidator(input);
 
         return Integer.parseInt(input);
     }
