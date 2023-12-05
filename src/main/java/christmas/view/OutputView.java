@@ -7,4 +7,8 @@ public class OutputView {
     public void printGreetingMessage() {
         System.out.println(GREETING_MESSAGE.getMessage());
     }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
+    }
 }

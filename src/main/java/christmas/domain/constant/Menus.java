@@ -1,5 +1,10 @@
 package christmas.domain.constant;
 
+import christmas.domain.order.Menu;
+import christmas.exception.IllegalArgumentExceptionType;
+
+import java.util.stream.Stream;
+
 public enum Menus {
     WHITE_MUSHROOM_SOUP("양송이수프", 6000, MenuType.APPETIZER),
     TAPAS("타파스", 5500, MenuType.APPETIZER),
@@ -23,4 +28,24 @@ public enum Menus {
         this.price = price;
         this.menuType = menuType;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public MenuType menuType() {
+        return menuType;
+    }
+
+    public static Menus getByMenuName(String name) {
+        return Stream.of(values())
+                .filter(menus -> name.equals(menus.name))
+                .findAny()
+                .orElseThrow(IllegalArgumentExceptionType.INVALID_ORDER::getException);
+    }
+
 }

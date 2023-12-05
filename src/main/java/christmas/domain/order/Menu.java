@@ -1,19 +1,20 @@
 package christmas.domain.order;
 
 import christmas.domain.constant.MenuType;
+import christmas.domain.constant.Menus;
 
 public class Menu {
 
-    private final MenuType menuType;
+    private final Menus menus;
     private final int count;
 
-    public Menu(MenuType menuType, int count) {
-        this.menuType = menuType;
+    public Menu(Menus menus, int count) {
+        this.menus = menus;
         this.count = count;
     }
 
-    public MenuType MenuType() {
-        return menuType;
+    public Menus Menus() {
+        return menus;
     }
 
     public int count() {
