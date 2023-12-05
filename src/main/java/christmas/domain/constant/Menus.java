@@ -1,6 +1,6 @@
-package christmas.constant;
+package christmas.domain.constant;
 
-public enum MenuConstant {
+public enum Menus {
     WHITE_MUSHROOM_SOUP("양송이수프", 6000, MenuType.APPETIZER),
     TAPAS("타파스", 5500, MenuType.APPETIZER),
     CAESAR_SALAD("시저샐러드", 8000, MenuType.APPETIZER),
@@ -18,7 +18,7 @@ public enum MenuConstant {
     private final int price;
     private final MenuType menuType;
 
-    MenuConstant(String name, int price, MenuType menuType) {
+    Menus(String name, int price, MenuType menuType) {
         this.name = name;
         this.price = price;
         this.menuType = menuType;

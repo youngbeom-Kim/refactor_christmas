@@ -1,6 +1,6 @@
 package christmas.domain.order;
 
-import christmas.constant.MenuType;
+import christmas.domain.constant.MenuType;
 
 public class Menu {
 
