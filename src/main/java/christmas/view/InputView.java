@@ -3,6 +3,7 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.order.dto.MenuDto;
 import christmas.validator.input.InputDateValidator;
+import christmas.validator.input.InputMenuValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import static christmas.constant.StringConstant.DELIMITER;
 public class InputView {
 
     InputDateValidator inputDateValidator = new InputDateValidator();
+    InputMenuValidator inputMenuValidator = new InputMenuValidator();
 
     public int readDate() {
         System.out.println(ASKING_DATE_MESSAGE.getMessage());
@@ -30,6 +32,8 @@ public class InputView {
     public List<MenuDto> readMenu() {
         System.out.println(ASKING_MENU_MESSAGE.getMessage());
         String input = Console.readLine();
+
+        inputMenuValidator.menuValidator(input);
 
         return orderMenuClassify(input);
     }

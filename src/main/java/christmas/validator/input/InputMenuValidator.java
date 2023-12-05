@@ -10,8 +10,8 @@ public class InputMenuValidator {
 
     private void menuInputValidator(String input) {
 
-        if (input.matches("^([가-힣]+-[1-9]+[0-9]*\\s*)+(,\\s*[가-힣]+-[1-9]+[0-9]*)*$")) {
-            IllegalArgumentExceptionType.INVALID_ORDER.getException();
+        if (!input.matches("^([가-힣]+-[1-9]+[0-9]*\\s*)+(,\\s*[가-힣]+-[1-9]+[0-9]*)*$")) {
+            throw IllegalArgumentExceptionType.INVALID_ORDER.getException();
         }
 
     }
