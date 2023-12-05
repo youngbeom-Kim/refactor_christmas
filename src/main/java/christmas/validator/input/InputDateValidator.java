@@ -12,7 +12,7 @@ public class InputDateValidator {
         dateRangeValidator(input);
     }
 
-    public void onlyNumberValidator(String input) {
+    private void onlyNumberValidator(String input) {
 
         if (!input.matches("[0-9]+")) {
             throw IllegalArgumentExceptionType.INVALID_DATE.getException();
@@ -20,7 +20,7 @@ public class InputDateValidator {
 
     }
 
-    public void dateRangeValidator(String input) {
+    private void dateRangeValidator(String input) {
 
         int date = Integer.parseInt(input);
 
