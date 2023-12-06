@@ -10,7 +10,7 @@ import static christmas.constant.BenefitConstant.NO_DISCOUNT;
 public abstract class DiscountBuilder {
 
     private final Event event;
-    private final Reservation reservation;
+    protected final Reservation reservation;
 
     public DiscountBuilder(Event event, Reservation reservation) {
         this.event = event;
