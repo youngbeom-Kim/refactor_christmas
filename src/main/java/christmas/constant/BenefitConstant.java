@@ -1,7 +1,8 @@
 package christmas.constant;
 
 public enum BenefitConstant {
-    NO_DISCOUNT(0);
+    NO_DISCOUNT(0),
+    MIN_PAYMENT_PRICE(10000);
 
     private final int value;
 
