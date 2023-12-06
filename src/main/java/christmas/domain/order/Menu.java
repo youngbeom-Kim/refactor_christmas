@@ -21,4 +21,24 @@ public class Menu {
         return count;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public int getTotalPrice() {
+        return menus.getPrice() * count;
+    }
+
+    public boolean isDessert() {
+        return menus.menuType() == MenuType.DESSERT;
+    }
+
+    public boolean isMain() {
+        return menus.menuType() == MenuType.MAIN;
+    }
+
+    public boolean isDrink() {
+        return menus.menuType() == MenuType.DRINK;
+    }
+
 }

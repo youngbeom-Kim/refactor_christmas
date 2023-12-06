@@ -18,6 +18,10 @@ public class VisitDate {
         this.localDate = LocalDate.of(EVENT_YEAR.getValue(), DECEMBER.getValue(), date);
     }
 
+    public int getDayOfMonth() {
+        return localDate.getDayOfMonth();
+    }
+
     public boolean isSunday() {
         return localDate.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
