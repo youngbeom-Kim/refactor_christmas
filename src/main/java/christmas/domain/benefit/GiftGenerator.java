@@ -4,6 +4,6 @@ import christmas.domain.order.Menu;
 
 import java.util.List;
 
-public interface giftGenerator {
+public interface GiftGenerator {
     List<Menu> generateGift();
 }
