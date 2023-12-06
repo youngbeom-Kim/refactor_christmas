@@ -1,8 +1,8 @@
 package christmas.domain.order.mapper;
 
-import christmas.domain.constant.MenuType;
 import christmas.domain.constant.Menus;
 import christmas.domain.order.Menu;
+import christmas.domain.order.Order;
 import christmas.domain.order.dto.MenuDto;
 import christmas.exception.IllegalArgumentExceptionType;
 
@@ -12,7 +12,7 @@ public class MenuMapper {
         String name = menuDto.name();
         int count = menuDto.count();
         Menus menus = convertMenuName(name);
-        return new Menu(menus, count);
+        return new Order(menus, count);
     }
 
     private static Menus convertMenuName(String menuName) {

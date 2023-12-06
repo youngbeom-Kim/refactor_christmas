@@ -3,7 +3,7 @@ package christmas.domain.order;
 import christmas.domain.constant.MenuType;
 import christmas.domain.constant.Menus;
 
-public class Menu {
+public abstract class Menu {
 
     private final Menus menus;
     private final int count;
