@@ -13,7 +13,7 @@ public abstract class Menu {
         this.count = count;
     }
 
-    public Menus Menus() {
+    public Menus getMenus() {
         return menus;
     }
 

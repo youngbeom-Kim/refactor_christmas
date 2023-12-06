@@ -1,7 +1,6 @@
 package christmas.view;
 
-import christmas.domain.benefit.Discount;
-import christmas.domain.benefit.DiscountDto;
+import christmas.domain.benefit.dto.DiscountDto;
 import christmas.domain.constant.Badge;
 import christmas.domain.constant.Event;
 import christmas.domain.order.dto.MenuDto;
@@ -21,7 +20,6 @@ import static christmas.constant.InfoMessage.ORDERED_MENU_MESSAGE;
 import static christmas.constant.InfoMessage.PRICE_EXPRESSION;
 import static christmas.constant.InfoMessage.TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE;
 import static christmas.constant.InfoMessage.TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE;
-import static christmas.domain.constant.Badge.NO_BADGE;
 
 public class OutputView {
 

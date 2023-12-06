@@ -1,9 +1,13 @@
 package christmas.controller;
 
 import christmas.domain.benefit.ChampagneGiftGenerator;
+import christmas.domain.benefit.Discount;
 import christmas.domain.benefit.DiscountBuilder;
 import christmas.domain.benefit.DiscountDirector;
+import christmas.domain.benefit.dto.DiscountDto;
 import christmas.domain.benefit.factory.DiscountFactory;
+import christmas.domain.benefit.mapper.DiscountMapper;
+import christmas.domain.constant.Badge;
 import christmas.domain.order.Menu;
 import christmas.domain.order.OrderMenu;
 import christmas.domain.order.Reservation;
@@ -16,7 +20,6 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PromotionController {
 
@@ -27,6 +30,8 @@ public class PromotionController {
     public void run() {
         Reservation reservation = createReservation();
         EventResult eventResult = createEventResult(reservation);
+        printOrderInformation(reservation);
+        printEventResult(reservation, eventResult);
     }
 
     private Reservation createReservation() {
@@ -58,6 +63,43 @@ public class PromotionController {
         ChampagneGiftGenerator champagneGiftGenerator = new ChampagneGiftGenerator(reservation.getTotalPayment());
 
         return new DiscountDirector(discountBuilders, champagneGiftGenerator);
+    }
+
+    private void printOrderInformation(Reservation reservation) {
+        outputView.printEventBenefitPreviewMessage(reservation.getVisitDayOfMonth());
+        printOrderMenus(reservation.getOrderMenu());
+        outputView.printTotalPriceBeforeDiscount(reservation.getTotalPayment());
+    }
+
+    private void printOrderMenus(List<Menu> orderMenus) {
+        List<MenuDto> orderMenuDto = orderMenus.stream().map(MenuMapper::toDto).toList();
+        outputView.printOrderedMenuMessage(orderMenuDto);
+    }
+
+    private void printEventResult(Reservation reservation, EventResult eventResult) {
+        int totalPriceAfterDiscount = eventResult.getTotalPriceAfterDiscount(reservation.getTotalPayment());
+
+        printGifts(eventResult.getGifts());
+        printDiscount(eventResult.getDiscounts());
+
+        outputView.printEventBenefitTotalPriceMessage(eventResult.getTotalBenefitPrice());
+        outputView.printTotalPriceAfterDiscount(totalPriceAfterDiscount);
+        printBadge(eventResult.getTotalBenefitPrice());
+    }
+
+    private void printGifts(List<Menu> gifts) {
+        List<MenuDto> giftData = gifts.stream().map(MenuMapper::toDto).toList();
+        outputView.printGiftMessage(giftData);
+    }
+
+    private void printDiscount(List<Discount> discounts) {
+        List<DiscountDto> discountData = discounts.stream().map(DiscountMapper::toDto).toList();
+        outputView.printEventBenefitMessage(discountData);
+    }
+
+    private void printBadge(int totalBenefitPrice) {
+        Badge badge = Badge.getBadgeByBenefitPrice(totalBenefitPrice);
+        outputView.printEventBadgeMessage(badge);
     }
 
 }

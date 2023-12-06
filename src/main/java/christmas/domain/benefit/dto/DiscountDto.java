@@ -1,4 +1,4 @@
-package christmas.domain.benefit;
+package christmas.domain.benefit.dto;
 
 import christmas.domain.constant.Event;
 
