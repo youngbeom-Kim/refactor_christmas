@@ -1,6 +1,9 @@
 package christmas_2.domain.money;
 
+import christmas_2.util.ExceptionUtil;
 import christmas_2.validation.IntegerValidator;
+
+import static christmas_2.message.ErrorMessages.INVALID_DIVISION_BY_ZERO_MESSAGE;
 
 public abstract class Money<T extends Money<T>> {
 
@@ -23,6 +26,28 @@ public abstract class Money<T extends Money<T>> {
 
     public boolean isSmallerThan(final int amount) {
         return this.amount < amount;
+    }
+
+    public T add(final Money<?> other) {
+        return create(this.amount + other.amount);
+    }
+
+    public T subtract(final Money<?> other) {
+        return create(this.amount + other.amount);
+    }
+
+    public T divide(final Money<?> other) {
+        if (other.amount == 0) {
+            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+        }
+        return create(this.amount / other.amount);
+    }
+
+    public T calculateRemainder(final Money<?> other) {
+        if (other.amount == 0) {
+            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+        }
+        return create(this.amount % other.amount);
     }
 
     protected void validateAmount(int amount) {
