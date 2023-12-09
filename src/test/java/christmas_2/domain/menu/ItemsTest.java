@@ -1,7 +1,5 @@
 package christmas_2.domain.menu;
 
-import christmas_2.domain.menu.Item;
-import christmas_2.domain.menu.Items;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;

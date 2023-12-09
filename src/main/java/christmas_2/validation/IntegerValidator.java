@@ -53,7 +53,7 @@ public final class IntegerValidator {
         }
     }
 
-    public static void validateNotSame(final int value1, final int value2) {
+    public static void validateSame(final int value1, final int value2) {
         if (value1 != value2) {
             ExceptionUtil.throwInvalidValueException();
         }

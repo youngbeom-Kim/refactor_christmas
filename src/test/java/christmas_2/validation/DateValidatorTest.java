@@ -16,7 +16,7 @@ public class DateValidatorTest {
             "2021, 1, 31",
             "2021, 01, 01"
     })
-    void 달력에_있는_옳은_날짜_검증_통과(String year, String month, String date) {
+    void 달력에_있는_옳은_날짜_검증_통과(final String year, final String month, final String date) {
         //When
         DateValidator.validateExistInCalendar(year, month, date);
     }
@@ -30,7 +30,7 @@ public class DateValidatorTest {
             "2020, 11, 31",
             "20000222222222, 1, 1"
     })
-    void 달력에_없는_날짜는_예외처리(String year, String month, String date) {
+    void 달력에_없는_날짜는_예외처리(final String year, final String month, final String date) {
         assertThatThrownBy(() -> DateValidator.validateExistInCalendar(year, month, date))
                 .isInstanceOf(IllegalArgumentException.class);
     }
