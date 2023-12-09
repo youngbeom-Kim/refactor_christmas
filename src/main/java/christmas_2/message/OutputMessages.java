@@ -1,7 +1,5 @@
 package christmas_2.message;
 
-import static christmas_2.constants.IntegerConstants.MAX_MENU_COUNT;
-import static christmas_2.constants.IntegerConstants.MINIMUM_EVENT_APPLY_PRICE;
 import static christmas_2.constants.IntegerConstants.THIS_MONTH;
 
 public enum OutputMessages {
