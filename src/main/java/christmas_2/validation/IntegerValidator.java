@@ -4,6 +4,7 @@ import christmas_2.util.ExceptionUtil;
 import christmas_2.util.IntegerUtil;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class IntegerValidator {
 
@@ -11,6 +12,11 @@ public class IntegerValidator {
         if (!IntegerUtil.isInteger(string)) {
             ExceptionUtil.throwInvalidValueException();
         }
+    }
+
+    public static void validateInteger(final String... strings) {
+        Arrays.stream(strings)
+                .forEach(string -> validateInteger(string));
     }
 
     public static void validateNotNegative(final int value) {
