@@ -17,7 +17,9 @@ public class Items {
     private final HashMap<Item, ItemCount> items;
 
     private Items(final HashMap<Item, ItemCount> items) {
+        MapValidator.validateNotEmpty(items);
         this.items = items;
+        validateSumOfCounts();
     }
 
     public static Items create(final String input) {

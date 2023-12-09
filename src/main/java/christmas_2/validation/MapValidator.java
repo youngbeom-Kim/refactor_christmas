@@ -12,7 +12,7 @@ public final class MapValidator {
         }
     }
 
-    public static void validateNotEmpty(final Map map, final String errorMessage) {
+    public static void validateNotEmpty(final Map map) {
         if (map.size() == 0) {
             ExceptionUtil.throwInvalidValueException();
         }
