@@ -13,4 +13,12 @@ public enum Menu {
         this.description = description;
         this.items = items;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Item[] getItems() {
+        return items;
+    }
 }

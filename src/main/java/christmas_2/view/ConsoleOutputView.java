@@ -1,5 +1,7 @@
 package christmas_2.view;
 
+import christmas_2.domain.menu.Item;
+import christmas_2.domain.menu.Menu;
 import christmas_2.util.OutputUtil;
 
 import static christmas_2.message.OutputMessages.ANNOUNCE_BEVERAGE_ONLY_NOT_ORDER;
@@ -25,6 +27,13 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void outputMenu() {
-
+        for (Menu menu : Menu.values()) {
+            System.out.println("<" + menu.getDescription() + ">");
+            for (Item item : menu.getItems()) {
+                System.out.println(item.getName() + "(" + item.getPrice() + ")");
+            }
+            OutputUtil.printEmptyLine();
+        }
+        OutputUtil.printEmptyLine();
     }
 }
