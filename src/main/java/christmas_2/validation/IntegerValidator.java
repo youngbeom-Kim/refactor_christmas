@@ -6,7 +6,7 @@ import christmas_2.util.IntegerUtil;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-public class IntegerValidator {
+public final class IntegerValidator {
 
     public static void validateInteger(final String string) {
         if (!IntegerUtil.isInteger(string)) {

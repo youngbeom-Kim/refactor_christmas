@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static christmas.exception.IllegalArgumentExceptionType.INVALID_DATE;
 
-public class DateValidator {
+public final class DateValidator {
 
     public static void validateExistInCalendar(final String year,
                                                final String month,

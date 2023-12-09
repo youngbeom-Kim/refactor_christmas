@@ -1,6 +1,6 @@
 package christmas_2.util;
 
-public class ExceptionUtil {
+public final class ExceptionUtil {
 
     public static void throwInvalidValueException() {
 
