@@ -15,7 +15,7 @@ public class MenuTest {
             "초코케이크, DESSERTS",
             "제로콜라, DRINKS"
     })
-    public void 아이템이_어떤메뉴에_해당되는지_찾기(String itemName, Menu expectedMenuName) {
+    public void 아이템이_어떤메뉴에_해당되는지_찾기(final String itemName, final Menu expectedMenuName) {
         //when
         Menu result = Menu.findMenuType(itemName);
 
@@ -30,10 +30,25 @@ public class MenuTest {
             "배고픈사람, DESSERTS",
             "오타난음식, DRINKS"
     })
-    public void 메뉴판에_없는_아이템을_찾으면_예외_발생(String itemName, Menu expectedMenuName) {
+    public void 메뉴판에_없는_아이템을_찾으면_예외_발생(final String itemName) {
         //When && Then
         assertThatThrownBy(() -> Menu.findMenuType(itemName))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 존재하지 않는 메뉴입니다.");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "DESSERTS, 초코케이크, true",
+            "DESSERTS, 토룡탕, false",
+            "DRINKS, 샴페인, true",
+            "DRINKS, 500cc, false"
+    })
+    public void contains_테스트(final Menu menu, final String itemName, final boolean expected) {
+        //When
+        final boolean result = menu.contains(itemName);
+
+        //Then
+        assertThat(result).isEqualTo(expected);
     }
 }
