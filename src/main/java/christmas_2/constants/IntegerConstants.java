@@ -2,6 +2,7 @@ package christmas_2.constants;
 
 public enum IntegerConstants {
     THIS_MONTH(12),
+    THIS_YEAR(2023),
     MINIMUM_EVENT_APPLY_PRICE(10000),
     MAX_MENU_COUNT(20),
     MIN_VISIT_DATE_RANGE(1),
@@ -15,5 +16,9 @@ public enum IntegerConstants {
 
     public int getValue() {
         return value;
+    }
+
+    public String toString() {
+        return String.valueOf(value);
     }
 }
