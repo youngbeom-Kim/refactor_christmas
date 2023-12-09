@@ -9,7 +9,7 @@ import static christmas_2.message.ErrorMessages.NOT_EXIST_MENU;
 public enum Menu {
     APPETIZERS("에피타이저", Appetizer.values()),
     MAIN_DISHES("메인", MainDish.values()),
-    DESSERT("디저트", Dessert.values()),
+    DESSERTS("디저트", Dessert.values()),
     DRINKS("음료", Drink.values());
 
     private final String description;
