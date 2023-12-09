@@ -12,4 +12,9 @@ public class ExceptionUtil {
         throw new IllegalArgumentException(message);
     }
 
+    public static IllegalArgumentException returnInvalidValueException(final String message) {
+
+        throw  new IllegalArgumentException(message);
+    }
+
 }
