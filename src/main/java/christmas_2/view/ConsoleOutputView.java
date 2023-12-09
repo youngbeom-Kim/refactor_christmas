@@ -1,39 +1,73 @@
 package christmas_2.view;
 
-import christmas_2.domain.menu.Item;
-import christmas_2.domain.menu.Menu;
+import christmas_2.message.ErrorMessages;
 import christmas_2.util.OutputUtil;
 
-import static christmas_2.message.OutputMessages.ANNOUNCE_BEVERAGE_ONLY_NOT_ORDER;
-import static christmas_2.message.OutputMessages.ANNOUNCE_MAX_MENU_COUNT;
-import static christmas_2.message.OutputMessages.ANNOUNCE_MINIMUM_EVENT_APPLY_PRICE;
-import static christmas_2.message.OutputMessages.WELCOME_MESSAGE;
+import static christmas_2.message.OutputMessages.BENEFITS_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.GIFT_MENU_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.ORDER_MENU_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.PREVIEW_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.THIS_MONTH_EVENT_BADGE_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.TOTAL_BENEFITS_PRICE_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.TOTAL_PRICE_AFTER_DISCOUNT_TITLE_MESSAGE;
+import static christmas_2.message.OutputMessages.TOTAL_PRICE_BEFORE_DISCOUNT_TITLE_MESSAGE;
 
 public class ConsoleOutputView implements OutputView {
-
     @Override
-    public void outputWelcomeMessage() {
-        System.out.println(WELCOME_MESSAGE.getMessage());
+    public void outputPreviewTitle() {
+        System.out.println(makeTitleForm(PREVIEW_TITLE_MESSAGE.getMessage()));
+
         OutputUtil.printEmptyLine();
     }
 
     @Override
-    public void outputPrecaution() {
-        System.out.println(ANNOUNCE_MINIMUM_EVENT_APPLY_PRICE.getMessage());
-        System.out.println(ANNOUNCE_BEVERAGE_ONLY_NOT_ORDER.getMessage());
-        System.out.println(ANNOUNCE_MAX_MENU_COUNT.getMessage());
+    public void outputOrderMenu() {
+        System.out.println(makeTitleForm(ORDER_MENU_TITLE_MESSAGE.getMessage()));
+
         OutputUtil.printEmptyLine();
     }
 
     @Override
-    public void outputMenu() {
-        for (Menu menu : Menu.values()) {
-            System.out.println("<" + menu.getDescription() + ">");
-            for (Item item : menu.getItems()) {
-                System.out.println(item.getName() + "(" + item.getPrice() + ")");
-            }
-            OutputUtil.printEmptyLine();
-        }
+    public void outputTotalPriceBeforeDiscount() {
+        System.out.println(makeTitleForm(TOTAL_PRICE_BEFORE_DISCOUNT_TITLE_MESSAGE.getMessage()));
+
         OutputUtil.printEmptyLine();
+    }
+
+    @Override
+    public void outputGiftMenu() {
+        System.out.println(makeTitleForm(GIFT_MENU_TITLE_MESSAGE.getMessage()));
+
+        OutputUtil.printEmptyLine();
+    }
+
+    @Override
+    public void outputBenefits() {
+        System.out.println(makeTitleForm(BENEFITS_TITLE_MESSAGE.getMessage()));
+
+        OutputUtil.printEmptyLine();
+    }
+
+    @Override
+    public void outputTotalBenefitsPrice() {
+        System.out.println(makeTitleForm(TOTAL_BENEFITS_PRICE_TITLE_MESSAGE.getMessage()));
+
+        OutputUtil.printEmptyLine();
+    }
+
+    @Override
+    public void outputTotalPriceAfterDiscount() {
+        System.out.println(makeTitleForm(TOTAL_PRICE_AFTER_DISCOUNT_TITLE_MESSAGE.getMessage()));
+
+        OutputUtil.printEmptyLine();
+    }
+
+    @Override
+    public void outputThisMonthBadge() {
+        System.out.println(makeTitleForm(THIS_MONTH_EVENT_BADGE_TITLE_MESSAGE.getMessage()));
+    }
+
+    private String makeTitleForm(String title) {
+        return "<" + title + ">";
     }
 }
