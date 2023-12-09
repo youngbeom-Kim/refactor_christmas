@@ -3,6 +3,7 @@ package christmas_2.domain.menu;
 import christmas_2.util.ExceptionUtil;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static christmas_2.message.ErrorMessages.NOT_EXIST_MENU;
 
@@ -31,7 +32,14 @@ public enum Menu {
     public static Menu findMenuType(final String itemName) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> Arrays.stream(menu.items)
-                    .anyMatch(item -> item.hasName(itemName)))
+                    .anyMatch(item -> item.hasItem(itemName)))
+                .findFirst()
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
+    }
+
+    public static Item findItem(final String itemName) {
+        return getAllItemsStream()
+                .filter(item -> item.hasItem(itemName))
                 .findFirst()
                 .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
     }
@@ -39,5 +47,10 @@ public enum Menu {
     public boolean contains(String itemName) {
         return Arrays.stream(items)
                 .anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
+    }
+
+    private static Stream<Item> getAllItemsStream() {
+        return Arrays.stream(Menu.values())
+                .flatMap(menu -> Arrays.stream(menu.items));
     }
 }
