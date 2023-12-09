@@ -35,4 +35,9 @@ public enum Menu {
                 .findFirst()
                 .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
     }
+
+    public boolean contains(String itemName) {
+        return Arrays.stream(items)
+                .anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
+    }
 }
