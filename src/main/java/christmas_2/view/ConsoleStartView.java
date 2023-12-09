@@ -7,13 +7,13 @@ import christmas_2.util.OutputUtil;
 import static christmas_2.message.StartMessages.ANNOUNCE_BEVERAGE_ONLY_NOT_ORDER;
 import static christmas_2.message.StartMessages.ANNOUNCE_MAX_MENU_COUNT;
 import static christmas_2.message.StartMessages.ANNOUNCE_MINIMUM_EVENT_APPLY_PRICE;
-import static christmas_2.message.StartMessages.WELCOME_MESSAGE;
+import static christmas_2.message.StartMessages.WELCOME;
 
 public class ConsoleStartView implements StartView {
 
     @Override
     public void printWelcomeMessage() {
-        System.out.println(WELCOME_MESSAGE.getMessage());
+        System.out.println(WELCOME.getMessage());
         OutputUtil.printEmptyLine();
     }
 

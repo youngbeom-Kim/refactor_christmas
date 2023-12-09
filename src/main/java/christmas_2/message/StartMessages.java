@@ -4,7 +4,7 @@ import static christmas_2.constants.IntegerConstants.MAX_MENU_COUNT;
 import static christmas_2.constants.IntegerConstants.MINIMUM_EVENT_APPLY_PRICE;
 
 public enum StartMessages {
-    WELCOME_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
+    WELCOME("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
     ANNOUNCE_MINIMUM_EVENT_APPLY_PRICE(
             String.format("총주문 금액 %,d원 이상부터 이벤트가 적용됩니다.", MINIMUM_EVENT_APPLY_PRICE.getValue())),
 

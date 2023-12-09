@@ -5,8 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static christmas_2.message.ErrorMessages.INVALID_DIVISION_BY_ZERO_MESSAGE;
-import static christmas_2.message.ErrorMessages.INVALID_NEGATIVE_VALUE_MESSAGE;
+import static christmas_2.message.ErrorMessages.INVALID_DIVISION_BY_ZERO;
+import static christmas_2.message.ErrorMessages.INVALID_NEGATIVE_VALUE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -39,7 +39,7 @@ class MoneyTest {
         //When && Then
         assertThatThrownBy(() -> new TestMoney(amount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_NEGATIVE_VALUE_MESSAGE.getMessage());
+                .hasMessageContaining(INVALID_NEGATIVE_VALUE.getMessage());
     }
 
     @ParameterizedTest
@@ -116,7 +116,7 @@ class MoneyTest {
         //When && Then
         assertThatThrownBy(() -> money1.divide(money2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+                .hasMessageContaining(INVALID_DIVISION_BY_ZERO.getMessage());
     }
 
     @ParameterizedTest
@@ -145,6 +145,6 @@ class MoneyTest {
         //When && Then
         assertThatThrownBy(() -> money1.calculateRemainder(money2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+                .hasMessageContaining(INVALID_DIVISION_BY_ZERO.getMessage());
     }
 }
