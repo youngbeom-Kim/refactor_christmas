@@ -25,7 +25,7 @@ public enum ChristmasDayDiscountEvent {
         if (!isMeetingConditions(date)) {
             return Benefit.createEmpty();
         }
-        return new Benefit(calcDiscountPrice(date));
+        return Benefit.create(calcDiscountPrice(date));
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
