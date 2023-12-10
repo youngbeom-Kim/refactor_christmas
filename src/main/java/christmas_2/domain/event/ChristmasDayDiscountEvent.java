@@ -29,8 +29,8 @@ public enum ChristmasDayDiscountEvent {
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
-        return !(date.isBefore(DISCOUNT_CONDITIONS.startDate))
-                || date.isAfter(DISCOUNT_CONDITIONS.endDate);
+        return !(date.isBefore(DISCOUNT_CONDITIONS.startDate)
+                || date.isAfter(DISCOUNT_CONDITIONS.endDate));
     }
 
     private static Money calcDiscountPrice(final LocalDate date) {
