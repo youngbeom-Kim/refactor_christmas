@@ -54,6 +54,14 @@ public final class Money {
         return create(this.amount + other.amount);
     }
 
+    public Money multiply(final Money other) {
+        return create(this.amount * other.amount);
+    }
+
+    public Money multiply(final int value) {
+        return create(this.amount * value);
+    }
+
     public Money divide(final Money other) {
         if (other.amount == 0) {
             ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO.getMessage());
