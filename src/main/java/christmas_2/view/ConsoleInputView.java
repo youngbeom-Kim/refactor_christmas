@@ -13,7 +13,7 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public String inputOrderItemsWithCount() {
+    public String inputOrderItemsWithCounts() {
         System.out.println(ORDER_MENU_ITEM_WITH_COUNT.getMessage());
         return InputUtil.inputString();
     }

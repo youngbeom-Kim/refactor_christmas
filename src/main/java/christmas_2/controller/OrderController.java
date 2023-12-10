@@ -24,6 +24,17 @@ public class OrderController {
 
     public void order() {
         printStartMessage();
+
+        final String dateOfVisit = inputView.inputExpectedDateOfVisit();
+        final String itemsWithCount = inputView.inputOrderItemsWithCounts();
+
+        outputView.outputPreviewTitle();
+        outputView.outputOrderMenu();
+        outputView.outputTotalPriceBeforeDiscount();
+        outputView.outputGifts();
+        outputView.outputDiscounts();
+        outputView.outputTotalPriceAfterDiscount();
+        outputView.outputThisMonthBadge();
     }
 
     private void printStartMessage() {
