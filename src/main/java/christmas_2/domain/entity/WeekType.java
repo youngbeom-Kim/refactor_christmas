@@ -1,8 +1,14 @@
 package christmas_2.domain.entity;
 
-import java.time.DayOfWeek;
-import java.util.EnumSet;
+import christmas_2.util.ExceptionUtil;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.stream.Stream;
+
+import static christmas.exception.IllegalArgumentExceptionType.INVALID_DATE;
 import static java.time.DayOfWeek.FRIDAY;
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SATURDAY;
@@ -19,5 +25,20 @@ public enum WeekType {
 
     WeekType(EnumSet<DayOfWeek> days) {
         this.days = days;
+    }
+
+    public static WeekType findWeekType(final DayOfWeek day) {
+        return Stream.of(WeekType.values())
+                .filter(weekType -> weekType.contains(day))
+                .findFirst()
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(INVALID_DATE.getMessage()));
+    }
+
+    public static WeekType findWeekType(final LocalDate date) {
+        return findWeekType(date.getDayOfWeek());
+    }
+
+    public boolean contains(final DayOfWeek day) {
+        return days.contains(day);
     }
 }
