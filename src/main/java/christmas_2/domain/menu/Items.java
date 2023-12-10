@@ -1,5 +1,6 @@
 package christmas_2.domain.menu;
 
+import christmas_2.domain.entity.Money;
 import christmas_2.util.ExceptionUtil;
 import christmas_2.util.StringListUtil;
 import christmas_2.util.StringUtil;
@@ -8,6 +9,8 @@ import christmas_2.validation.MapValidator;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static christmas_2.constants.IntegerConstants.MAX_MENU_ITEM_COUNT;
 import static christmas_2.constants.StringConstants.SEPERATE_STANDARD;
@@ -69,5 +72,26 @@ public class Items {
         if (calcItemCounts() > MAX_MENU_ITEM_COUNT.getValue()) {
             ExceptionUtil.throwInvalidValueException();
         }
+    }
+
+    public Money calcTotalPrice() {
+        return items.entrySet()
+                .stream()
+                .map(entry -> {
+                    Item item = entry.getKey();
+                    ItemCount itemCount = entry.getValue();
+
+                    Money itemPrice = item.getPrice();
+                    return itemPrice.multiply(itemCount.getCount());
+                })
+                .reduce(Money.create(0), Money::add);
+    }
+
+    public Set<Item> findKeys() {
+        return items.keySet();
+    }
+
+    public Set<Map.Entry<Item, ItemCount>> toEntrySet() {
+        return items.entrySet();
     }
 }

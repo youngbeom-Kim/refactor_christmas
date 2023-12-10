@@ -2,6 +2,9 @@ package christmas_2.domain.event;
 
 import christmas_2.domain.entity.Money;
 import christmas_2.domain.entity.WeekType;
+import christmas_2.domain.menu.Item;
+import christmas_2.domain.menu.ItemCount;
+import christmas_2.domain.menu.Items;
 import christmas_2.domain.menu.Menu;
 
 import java.time.DayOfWeek;
@@ -21,19 +24,34 @@ public enum WeekdayDiscountEvent {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    WeekdayDiscountEvent(final WeekType validWeekType, final Menu validMenu, final int startDate, final int endDate) {
+    WeekdayDiscountEvent(final WeekType validWeekType,
+                         final Menu validMenu,
+                         final int startDate,
+                         final int endDate) {
         this.validWeekType = validWeekType;
         this.validMenu = validMenu;
         this.startDate = LocalDate.of(THIS_YEAR.getValue(), THIS_MONTH.getValue(), startDate);
         this.endDate = LocalDate.of(THIS_YEAR.getValue(), THIS_MONTH.getValue(), endDate);
     }
 
-    public static Benefit calculateBenefit(final LocalDate date, final Menu menu) {
-        if (isApplicable(date, menu)) {
-            return Benefit.create(calcDiscountPrice());
-        }
-        return Benefit.createEmpty();
+    public static Benefit calculateBenefit(final LocalDate date, final Items items) {
+        final Money totalDiscount = items.toEntrySet()
+                .stream()
+                .map(entry -> {
+                    final Item item = entry.getKey();
+                    final ItemCount itemCount = entry.getValue();
+                    final Menu menu = Menu.findMenu(item);
+
+                    if (!isApplicable(date, menu)) {
+                        return Money.create(0);
+                    }
+                    return calcDiscountPrice().multiply(itemCount.getCount());
+                })
+                .reduce(Money.create(0), Money::add);
+
+        return Benefit.create(totalDiscount);
     }
+
 
     private static boolean isApplicable(final LocalDate date, final Menu menu) {
         return isDateInValidaWeekType(date) &&

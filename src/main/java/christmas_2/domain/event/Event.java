@@ -1,6 +1,7 @@
 package christmas_2.domain.event;
 
 import christmas_2.domain.entity.Money;
+import christmas_2.domain.menu.Items;
 import christmas_2.domain.menu.Menu;
 import org.assertj.core.util.TriFunction;
 
@@ -13,54 +14,54 @@ import static christmas_2.domain.event.Event.ApplyStatus.NO;
 
 public enum Event {
     CHRISTMAS_DAY_DISCOUNT("크리스마스 디데이 할인",
-            (date, menu, totalOrderMoney)
+            (date, items, totalOrderMoney)
                     -> ChristmasDayDiscountEvent.calculateBenefit(date)),
     WEEKDAY_DISCOUNT("평일 할인",
-            (date, menu, totalOrderMoney)
-                    -> WeekdayDiscountEvent.calculateBenefit(date, menu)),
+            (date, items, totalOrderMoney)
+                    -> WeekdayDiscountEvent.calculateBenefit(date, items)),
     WEEKEND_DISCOUNT("주말 할인",
-            (date, menu, totalOrderPrice) ->
-                    WeekendDiscountEvent.calculateBenefit(date, menu)),
+            (date, items, totalOrderPrice) ->
+                    WeekendDiscountEvent.calculateBenefit(date, items)),
     SPECIAL_DISCOUNT("특별 할인",
-            (date, menu, totalOrderPrice) ->
+            (date, items, totalOrderPrice) ->
                     SpecialDiscountEvent.calculateBenefit(date)),
     GIFT_EVENT("증정 이벤트",
-            (date, menu, totalOrderPrice) ->
+            (date, items, totalOrderPrice) ->
                     GiftEvent.calculateBenefit(date, totalOrderPrice));
 
     private final String description;
-    private final TriFunction<LocalDate, Menu, Money, Benefit> discountCalculator;
+    private final TriFunction<LocalDate, Items, Money, Benefit> discountCalculator;
 
     Event(final String description,
-          final TriFunction<LocalDate, Menu, Money, Benefit> discountCalculator) {
+          final TriFunction<LocalDate, Items, Money, Benefit> discountCalculator) {
         this.description = description;
         this.discountCalculator = discountCalculator;
     }
 
     public Benefit calculateDiscount(final LocalDate date,
-                                     final Menu menu,
+                                     final Items items,
                                      final Money totalOrderPrice) {
-        return discountCalculator.apply(date, menu, totalOrderPrice);
+        return discountCalculator.apply(date, items, totalOrderPrice);
     }
 
     public static Benefits findBenefits(final LocalDate date,
-                                        final Menu menu,
+                                        final Items items,
                                         final Money totalOrderPrice) {
         if (!isEventApplicable(totalOrderPrice)) {
             return Benefits.createEmpty();
         }
-        return generateEventBenefits(date, menu, totalOrderPrice);
+        return generateEventBenefits(date, items, totalOrderPrice);
     }
 
     private static boolean isEventApplicable(Money totalOrderPrice) {
         return ApplyStatus.checkEventApplication(totalOrderPrice) != NO;
     }
 
-    private static Benefits generateEventBenefits(LocalDate date, Menu menu, Money totalOrderPrice) {
+    private static Benefits generateEventBenefits(LocalDate date, Items items, Money totalOrderPrice) {
         EnumMap<Event, Benefit> eventBenefitsMap = new EnumMap<>(Event.class);
 
         for (Event event : Event.values()) {
-            Benefit benefit = event.calculateDiscount(date, menu, totalOrderPrice);
+            Benefit benefit = event.calculateDiscount(date, items, totalOrderPrice);
             if (!benefit.isNull()) {
                 eventBenefitsMap.put(event, benefit);
             }
