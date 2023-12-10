@@ -1,7 +1,6 @@
 package christmas_2.domain.event;
 
-import christmas_2.domain.money.DiscountPrice;
-import christmas_2.domain.money.Money;
+import christmas_2.domain.entity.Money;
 import christmas_2.util.ExceptionUtil;
 
 import java.util.Arrays;
@@ -16,14 +15,14 @@ public enum Badge {
     SANTA("산타", 20_000, Integer.MAX_VALUE);
 
     private final String name;
-    private final DiscountPrice minBenefitsPrice;
-    private final DiscountPrice maxBenefitsPrice;
+    private final Money minBenefitsPrice;
+    private final Money maxBenefitsPrice;
 
 
     Badge(final String name, final int minBenefitsPrice, final int maxBenefitsPrice) {
         this.name = name;
-        this.minBenefitsPrice = new DiscountPrice(minBenefitsPrice);
-        this.maxBenefitsPrice = new DiscountPrice(maxBenefitsPrice);
+        this.minBenefitsPrice = Money.create(minBenefitsPrice);
+        this.maxBenefitsPrice = Money.create(maxBenefitsPrice);
     }
 
     public static Badge getBadgeByPrice(final Money price) {

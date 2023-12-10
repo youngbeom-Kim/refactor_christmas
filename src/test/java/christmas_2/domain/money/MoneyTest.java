@@ -1,5 +1,6 @@
 package christmas_2.domain.money;
 
+import christmas_2.domain.entity.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,22 +13,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class MoneyTest {
 
-    private static class TestMoney extends Money {
-        public TestMoney(int amount) {
-            super(amount);
-        }
-
-        @Override
-        protected Money create(int amount) {
-            return new TestMoney(amount);
-        }
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {100, 20, 2100000000, 0})
     public void 정상_Money_자식_객체_생성(int amount) {
         //when
-        Money money = new TestMoney(amount);
+        Money money = Money.create(amount);
 
         //Then
         assertThat(money.getAmount()).isEqualTo(amount);
@@ -37,7 +27,7 @@ class MoneyTest {
     @ValueSource(ints = {-1, -2100000000})
     public void Money_는_음수값을_가질_수_없음(int amount) {
         //When && Then
-        assertThatThrownBy(() -> new TestMoney(amount))
+        assertThatThrownBy(() -> Money.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_NEGATIVE_VALUE.getMessage());
     }
@@ -50,7 +40,7 @@ class MoneyTest {
     })
     public void 더_크거나_같은_값인지_상태값_반환(int amount, int compareTo, boolean expected) {
         //Given
-        Money money = new TestMoney(amount);
+        Money money = Money.create(amount);
 
         //When && Then
         assertThat(money.isBiggerOrSameThan(compareTo)).isEqualTo(expected);
@@ -64,7 +54,7 @@ class MoneyTest {
     })
     public void 더_작은_값인지_상태값_반환(int amount, int compareTo, boolean expected) {
         //Given
-        Money money = new TestMoney(amount);
+        Money money = Money.create(amount);
 
         //When && Then
         assertThat(money.isSmallerThan(compareTo)).isEqualTo(expected);
@@ -77,11 +67,11 @@ class MoneyTest {
     })
     void Money_끼리_더하면_새로운_Money_객체(int amount1, int amount2, int expected) {
         //Given
-        TestMoney money1 = new TestMoney(amount1);
-        TestMoney money2 = new TestMoney(amount2);
+        final Money money1 = Money.create(amount1);
+        final Money money2 = Money.create(amount2);
 
         //When
-        TestMoney result = (TestMoney) money1.add(money2);
+        final Money result = money1.add(money2);
 
         //Then
         assertThat(money1).isNotSameAs(result);
@@ -97,11 +87,11 @@ class MoneyTest {
     })
     void Money_끼리_나누면_새로운_Money_객체(int amount1, int amount2, int expected) {
         //Given
-        TestMoney money1 = new TestMoney(amount1);
-        TestMoney money2 = new TestMoney(amount2);
+        final Money money1 = Money.create(amount1);
+        final Money money2 = Money.create(amount2);
 
         //When
-        TestMoney result = (TestMoney) money1.divide(money2);
+        final Money result = money1.add(money2);
 
         //Then
         assertThat(result.getAmount()).isEqualTo(expected);
@@ -110,8 +100,8 @@ class MoneyTest {
     @Test
     void Money_는_0_으로_나눌_수_없음() {
         //Given
-        TestMoney money1 = new TestMoney(100);
-        TestMoney money2 = new TestMoney(0);
+        final Money money1 = Money.create(100);
+        final Money money2 = Money.create(0);
 
         //When && Then
         assertThatThrownBy(() -> money1.divide(money2))
@@ -126,11 +116,12 @@ class MoneyTest {
     })
     void Money_끼리_나머지_계산하면_새로운_Money_객체(int amount1, int amount2, int expected) {
         //Given
-        TestMoney money1 = new TestMoney(amount1);
-        TestMoney money2 = new TestMoney(amount2);
+        //Given
+        final Money money1 = Money.create(amount1);
+        final Money money2 = Money.create(amount2);
 
         //When
-        TestMoney result = (TestMoney) money1.calculateRemainder(money2);
+        final Money result = money1.calculateRemainder(money2);
 
         //Then
         assertThat(result.getAmount()).isEqualTo(expected);
@@ -139,8 +130,8 @@ class MoneyTest {
     @Test
     void Money_는_나머지_계산시_0으로_나눌_수_없음() {
         //Given
-        TestMoney money1 = new TestMoney(100);
-        TestMoney money2 = new TestMoney(0);
+        final Money money1 = Money.create(100);
+        final Money money2 = Money.create(0);
 
         //When && Then
         assertThatThrownBy(() -> money1.calculateRemainder(money2))

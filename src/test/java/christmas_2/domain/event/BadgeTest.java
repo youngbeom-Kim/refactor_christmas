@@ -1,6 +1,6 @@
 package christmas_2.domain.event;
 
-import christmas_2.domain.money.DiscountPrice;
+import christmas_2.domain.entity.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -25,7 +25,7 @@ public class BadgeTest {
     })
     public void 정상_뱃지_반환(final int price, final String expectedBadgeName) {
         //When
-        final DiscountPrice discountPrice = new DiscountPrice(price);
+        final Money discountPrice = Money.create(price);
         final Badge result = Badge.getBadgeByPrice(discountPrice);
 
         //Then

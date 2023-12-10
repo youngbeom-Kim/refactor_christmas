@@ -1,6 +1,6 @@
 package christmas_2.domain.menu;
 
-import christmas_2.domain.money.ItemPrice;
+import christmas_2.domain.entity.Money;
 
 public enum Appetizer implements Item {
     MUSHROOM_SOUP("양송이수프", 6_000),
@@ -8,11 +8,11 @@ public enum Appetizer implements Item {
     CAESAR_SALAD("시저샐러드", 8_000);
 
     private final String name;
-    private final ItemPrice price;
+    private final Money price;
 
     Appetizer(final String name, final int price) {
         this.name = name;
-        this.price = new ItemPrice(price);
+        this.price = Money.create(price);
     }
 
     @Override
@@ -21,7 +21,7 @@ public enum Appetizer implements Item {
     }
 
     @Override
-    public ItemPrice getPrice() {
+    public Money getPrice() {
         return price;
     }
 }
