@@ -29,7 +29,7 @@ public enum Menu {
         return items;
     }
 
-    public static Menu findMenuType(final String itemName) {
+    public static Menu findMenu(final String itemName) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> Arrays.stream(menu.items)
                     .anyMatch(item -> item.hasItem(itemName)))
