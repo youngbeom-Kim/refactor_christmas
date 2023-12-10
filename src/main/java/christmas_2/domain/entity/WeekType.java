@@ -4,11 +4,10 @@ import christmas_2.util.ExceptionUtil;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.stream.Stream;
 
-import static christmas.exception.IllegalArgumentExceptionType.INVALID_DATE;
+import static christmas_2.message.ErrorMessages.INVALID_DATE;
 import static java.time.DayOfWeek.FRIDAY;
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SATURDAY;
