@@ -5,26 +5,27 @@ import christmas_2.domain.menu.Item;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
 
 public class OrderBenefitsDto {
 
-    private final HashMap<String, Integer> gifts;
-    private final HashMap<String, Integer> discounts;
+    private final Map<String, Integer> gifts;
+    private final Map<String, Integer> discounts;
     private final int priceBeforeDiscount;
 
-    public OrderBenefitsDto(final HashMap<String, Integer> gifts,
-                            final HashMap<String, Integer> discounts,
+    public OrderBenefitsDto(final Map<String, Integer> gifts,
+                            final Map<String, Integer> discounts,
                             final int priceBeforeDiscount) {
         this.gifts = gifts;
         this.discounts = discounts;
         this.priceBeforeDiscount = priceBeforeDiscount;
     }
 
-    public HashMap<String, Integer> getGifts() {
+    public Map<String, Integer> getGifts() {
         return gifts;
     }
 
-    public HashMap<String, Integer> getDiscounts() {
+    public Map<String, Integer> getDiscounts() {
         return discounts;
     }
 

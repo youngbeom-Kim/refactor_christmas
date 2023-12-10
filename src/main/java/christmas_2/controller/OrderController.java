@@ -1,9 +1,13 @@
 package christmas_2.controller;
 
+import christmas_2.domain.event.Benefits;
+import christmas_2.domain.menu.Items;
 import christmas_2.service.OrderService;
 import christmas_2.view.InputView;
 import christmas_2.view.OutputView;
 import christmas_2.view.StartView;
+
+import java.time.LocalDate;
 
 public class OrderController {
 
@@ -27,14 +31,6 @@ public class OrderController {
 
         final String dateOfVisit = inputView.inputExpectedDateOfVisit();
         final String itemsWithCount = inputView.inputOrderItemsWithCounts();
-
-        outputView.outputPreviewTitle();
-        outputView.outputOrderMenu();
-        outputView.outputTotalPriceBeforeDiscount();
-        outputView.outputGifts();
-        outputView.outputDiscounts();
-        outputView.outputTotalPriceAfterDiscount();
-        outputView.outputThisMonthBadge();
     }
 
     private void printStartMessage() {

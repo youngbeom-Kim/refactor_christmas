@@ -33,10 +33,13 @@ public class ConsoleOutputView implements OutputView {
         outputTotalPriceBeforeDiscount(orderItemsDto.getPriceBeforeDiscount());
     }
 
+    private void outputTotalPriceBeforeDiscount(int priceBeforeDiscount) {
+    }
+
     @Override
     public void outputBenefits(final OrderBenefitsDto orderBenefitsDto) {
-        final HashMap<String, Integer> gifts = orderBenefitsDto.getGifts();
-        final HashMap<String, Integer> discounts = orderBenefitsDto.getDiscounts();
+        final Map<String, Integer> gifts = orderBenefitsDto.getGifts();
+        final Map<String, Integer> discounts = orderBenefitsDto.getDiscounts();
         final int totalPriceBeforeDiscount = orderBenefitsDto.getPriceBeforeDiscount();
         final int sumDiscounts = sumDiscounts(discounts);
         final int totalPriceAfterDiscount = totalPriceBeforeDiscount - sumDiscounts;
@@ -54,7 +57,7 @@ public class ConsoleOutputView implements OutputView {
         System.out.println(badge);
     }
 
-    private void outputItemAndCounts(final HashMap<String, Integer> itemsAndCounts) {
+    private void outputItemAndCounts(final Map<String, Integer> itemsAndCounts) {
         outputTitle(ORDER_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : itemsAndCounts.entrySet()) {
@@ -63,18 +66,29 @@ public class ConsoleOutputView implements OutputView {
         OutputUtil.printEmptyLine();
     }
 
-    private int sumDiscounts(final HashMap<String, Integer> discounts) {
+    private int sumDiscounts(final Map<String, Integer> discounts) {
         return discounts.values()
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
-    private void outputGifts(final HashMap<String, Integer> gifts) {
+    private void outputGifts(final Map<String, Integer> gifts) {
         outputTitle(GIFT_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : gifts.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+        }
+        OutputUtil.printEmptyLine();
+    }
+
+    private void outputDiscounts(final Map<String, Integer> discounts) {
+        outputTitle(BENEFITS_TITLE.getMessage());
+
+        for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
+            System.out.println(discountEntry.getKey() + ": "
+                    + StringUtil.formatByThousandSeparator(discountEntry.getValue() * -1)
+                    + "원");
         }
         OutputUtil.printEmptyLine();
     }
