@@ -1,7 +1,14 @@
 package christmas_2.view;
 
+import christmas_2.domain.dto.MemberBadgeDto;
+import christmas_2.domain.dto.OrderBenefitsDto;
+import christmas_2.domain.dto.OrderItemsDto;
 import christmas_2.message.ErrorMessages;
 import christmas_2.util.OutputUtil;
+import christmas_2.util.StringUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static christmas_2.message.OutputMessages.BENEFITS_TITLE;
 import static christmas_2.message.OutputMessages.GIFT_MENU_TITLE;
@@ -15,59 +22,70 @@ import static christmas_2.message.OutputMessages.TOTAL_PRICE_BEFORE_DISCOUNT_TIT
 public class ConsoleOutputView implements OutputView {
     @Override
     public void outputPreviewTitle() {
-        System.out.println(makeTitleForm(PREVIEW_TITLE.getMessage()));
+        outputTitle(PREVIEW_TITLE.getMessage());
 
         OutputUtil.printEmptyLine();
     }
 
     @Override
-    public void outputOrderMenu() {
-        System.out.println(makeTitleForm(ORDER_MENU_TITLE.getMessage()));
-
-        OutputUtil.printEmptyLine();
+    public void outputOrderItems(final OrderItemsDto orderItemsDto) {
+        outputItemAndCounts(orderItemsDto.getItems());
+        outputTotalPriceBeforeDiscount(orderItemsDto.getPriceBeforeDiscount());
     }
 
     @Override
-    public void outputTotalPriceBeforeDiscount() {
-        System.out.println(makeTitleForm(TOTAL_PRICE_BEFORE_DISCOUNT_TITLE.getMessage()));
+    public void outputBenefits(final OrderBenefitsDto orderBenefitsDto) {
+        final HashMap<String, Integer> gifts = orderBenefitsDto.getGifts();
+        final HashMap<String, Integer> discounts = orderBenefitsDto.getDiscounts();
+        final int totalPriceBeforeDiscount = orderBenefitsDto.getPriceBeforeDiscount();
+        final int sumDiscounts = sumDiscounts(discounts);
+        final int totalPriceAfterDiscount = totalPriceBeforeDiscount - sumDiscounts;
 
-        OutputUtil.printEmptyLine();
+        outputGifts(gifts);
+        outputDiscounts(discounts);
+        outputTotalPriceAfterDiscount(totalPriceAfterDiscount);
     }
 
     @Override
-    public void outputGifts() {
-        System.out.println(makeTitleForm(GIFT_MENU_TITLE.getMessage()));
+    public void outputThisMonthBadge(MemberBadgeDto memberBadgeDto) {
+        outputTitle(TOTAL_PRICE_BEFORE_DISCOUNT_TITLE.getMessage());
 
+        final String badge = memberBadgeDto.getBadge();
+        System.out.println(badge);
+    }
+
+    private void outputItemAndCounts(final HashMap<String, Integer> itemsAndCounts) {
+        outputTitle(ORDER_MENU_TITLE.getMessage());
+
+        for (Map.Entry<String, Integer> entry : itemsAndCounts.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+        }
         OutputUtil.printEmptyLine();
     }
 
-    @Override
-    public void outputDiscounts() {
-        System.out.println(makeTitleForm(BENEFITS_TITLE.getMessage()));
+    private int sumDiscounts(final HashMap<String, Integer> discounts) {
+        return discounts.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 
+    private void outputGifts(final HashMap<String, Integer> gifts) {
+        outputTitle(GIFT_MENU_TITLE.getMessage());
+
+        for (Map.Entry<String, Integer> entry : gifts.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+        }
         OutputUtil.printEmptyLine();
     }
 
-    @Override
-    public void outputTotalBenefitsPrice() {
-        System.out.println(makeTitleForm(TOTAL_BENEFITS_PRICE_TITLE.getMessage()));
-
+    public void outputTotalPriceAfterDiscount(final int totalPriceAfterDiscount) {
+        outputTitle(TOTAL_PRICE_AFTER_DISCOUNT_TITLE.getMessage());
+        System.out.println(StringUtil.formatByThousandSeparator(totalPriceAfterDiscount));
         OutputUtil.printEmptyLine();
     }
 
-    @Override
-    public void outputTotalPriceAfterDiscount() {
-        System.out.println(makeTitleForm(TOTAL_PRICE_AFTER_DISCOUNT_TITLE.getMessage()));
-
-        OutputUtil.printEmptyLine();
-    }
-
-    @Override
-    public void outputThisMonthBadge() {
-        System.out.println(makeTitleForm(THIS_MONTH_EVENT_BADGE_TITLE.getMessage()));
-    }
-
-    private String makeTitleForm(String title) {
-        return "<" + title + ">";
+    private void outputTitle(String title) {
+        System.out.println("<" + title + ">");
     }
 }
