@@ -34,6 +34,6 @@ public class Benefit {
     }
 
     public boolean isNull() {
-        return false;
+        return discountPrice.isSmallerOrSameThan(0) && gifts.isNull();
     }
 }

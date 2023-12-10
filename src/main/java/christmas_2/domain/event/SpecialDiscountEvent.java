@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import static christmas_2.constants.IntegerConstants.THIS_MONTH;
 import static christmas_2.constants.IntegerConstants.THIS_YEAR;
+import static christmas_2.domain.event.SpecialDiscountEvent.DiscountAmount.STANDARD;
 
 public enum SpecialDiscountEvent {
     SPECIAL_DISCOUNT_CONDITIONS(
@@ -35,7 +36,7 @@ public enum SpecialDiscountEvent {
     }
 
     private static Money calcDiscountPrice() {
-        return DiscountAmount.STANDARD.amount;
+        return STANDARD.amount;
     }
 
     protected enum DiscountAmount {

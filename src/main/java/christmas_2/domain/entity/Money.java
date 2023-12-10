@@ -42,6 +42,10 @@ public final class Money {
         return this.amount <= other.amount;
     }
 
+    public boolean isSmallerOrSameThan(final int amount) {
+        return this.amount <= amount;
+    }
+
     public boolean isInRange(final Money minPrice, final Money maxPrice) {
         return isBiggerOrSameThan(minPrice) && isSmallerThan(maxPrice);
     }
@@ -78,5 +82,18 @@ public final class Money {
 
     private void validate(int amount) {
         IntegerValidator.validateNotNegative(amount);
+    }
+
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final Money other = (Money) o;
+        return this.amount == other.amount;
     }
 }

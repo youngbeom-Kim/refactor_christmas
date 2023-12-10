@@ -11,7 +11,7 @@ import static christmas_2.domain.event.ChristmasDayDiscountEvent.DiscountAmount.
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public enum ChristmasDayDiscountEvent {
-    DISCOUNT_CONDITIONS(1, 25);
+    CHRISTMAS_DAY_DISCOUNT_CONDITIONS(1, 25);
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -29,8 +29,8 @@ public enum ChristmasDayDiscountEvent {
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
-        return !(date.isBefore(DISCOUNT_CONDITIONS.startDate)
-                || date.isAfter(DISCOUNT_CONDITIONS.endDate));
+        return !(date.isBefore(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate)
+                || date.isAfter(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.endDate));
     }
 
     private static Money calcDiscountPrice(final LocalDate date) {
@@ -39,7 +39,7 @@ public enum ChristmasDayDiscountEvent {
     }
 
     private static Money calculateDailySurcharge(final LocalDate date) {
-        final int daysSinceStart = (int) DAYS.between(DISCOUNT_CONDITIONS.startDate, date);
+        final int daysSinceStart = (int) DAYS.between(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate, date);
         final Money oneDaySurcharge = DAILY_SURCHARGE.amount;
         return oneDaySurcharge.multiply(daysSinceStart);
     }

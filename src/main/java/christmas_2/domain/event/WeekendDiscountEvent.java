@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import static christmas_2.constants.IntegerConstants.THIS_MONTH;
 import static christmas_2.constants.IntegerConstants.THIS_YEAR;
 import static christmas_2.domain.entity.WeekType.WEEKEND;
+import static christmas_2.domain.event.WeekendDiscountEvent.DiscountAmount.STANDARD;
 import static christmas_2.domain.menu.Menu.MAIN_DISHES;
 
 public enum WeekendDiscountEvent {
@@ -49,7 +50,7 @@ public enum WeekendDiscountEvent {
     }
 
     private static Money calcDiscountPrice() {
-        return DiscountAmount.STANDARD.amount;
+        return STANDARD.amount;
     }
 
     protected enum DiscountAmount {
