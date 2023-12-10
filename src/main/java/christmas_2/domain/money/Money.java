@@ -25,7 +25,7 @@ public abstract class Money<T extends Money<T>> {
     }
 
     public boolean isSmallerThan(final int amount) {
-        return this.amount < amount;
+        return this.amount <= amount;
     }
 
     public boolean isBiggerOrSameThan(final Money<?> other) {
@@ -33,7 +33,7 @@ public abstract class Money<T extends Money<T>> {
     }
 
     public boolean isSmallerThan(final Money<?> other) {
-        return this.amount < other.amount;
+        return this.amount <= other.amount;
     }
 
     public boolean isInRange(final Money minPrice, final Money maxPrice) {
