@@ -8,6 +8,6 @@ public class DiscountPrice extends Money{
 
     @Override
     protected Money create(int amount) {
-        return null;
+        return new DiscountPrice(amount);
     }
 }
